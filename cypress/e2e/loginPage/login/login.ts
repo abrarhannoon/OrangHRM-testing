@@ -2,15 +2,10 @@ import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
 import HomePageAssertions from "@pageObjects/homePage/assertions";
 import LoginPageActions from "@pageObjects/loginPage/actions";
 import LoginPageAssertions from "@pageObjects/loginPage/assertions";
-import "../../support/commands";
 
 const loginPageActions = new LoginPageActions();
 const loginPageAssertions = new LoginPageAssertions();
 const homePageAssertions = new HomePageAssertions();
-
-before("", () => {
-  cy.login();
-});
 
 Given("User visits the login page", () => {
   loginPageActions.openLoginPage();
