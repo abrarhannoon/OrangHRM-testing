@@ -7,7 +7,7 @@ const loginPageActions = new LoginPageActions();
 const loginPageAssertions = new LoginPageAssertions();
 const homePageAssertions = new HomePageAssertions();
 
-Given("User visits the login page", (url: string) => {
+Given("User visits the login page", () => {
   loginPageActions.openLoginPage();
 });
 
