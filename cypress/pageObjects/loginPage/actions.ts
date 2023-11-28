@@ -3,16 +3,19 @@ class LoginPageActions {
     cy.visit("/auth/login");
   }
 
-  typeInUsernameInputField(username: string): void {
-    cy.get('input[name="username"]').type(username);
+  typeInUsernameInputField(username: string) {
+    cy.get('input[name="username"]').clear().type(username);
+    return this;
   }
 
-  typeInPasswordInputField(password: string): void {
-    cy.get('input[name="password"]').type(password);
+  typeInPasswordInputField(password: string) {
+    cy.get('input[name="password"]').clear().type(password);
+    return this;
   }
 
-  clickOnLoginButton(): void {
+  clickOnLoginButton() {
     cy.get('button[type="submit"]').click();
+    return this;
   }
 }
 
