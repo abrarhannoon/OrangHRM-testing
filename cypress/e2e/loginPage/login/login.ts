@@ -1,5 +1,5 @@
 import { Given, Then, When } from "@badeball/cypress-cucumber-preprocessor";
-import HomePageAssertions from "@pageObjects/homePage/assertions";
+import HomePageAssertions from "@pageObjects/dashBoardPage/assertions";
 import LoginPageActions from "@pageObjects/loginPage/actions";
 import LoginPageAssertions from "@pageObjects/loginPage/assertions";
 
