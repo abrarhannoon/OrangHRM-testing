@@ -1,16 +1,18 @@
-class AddEmployeePageAssertions {
+class EmployeeListPageAssertions {
   verifyFirstNameInputFiledIsExist(isExist: boolean) {
     cy.get('input[name="firstName"]').should(isExist ? "exist" : "not.exist");
     return this;
   }
+
   verifyFirstNameInputFiledIsContainPlaceHolder(
-    isContain: boolean,
-    placeholder: string
+    placeholder: string,
+    isContain: boolean
   ) {
-    cy.get('input[name="firstName"]')
-      .clear()
-      .invoke("attr", "placeholder")
-      .should(isContain ? "contain" : "not.contain", placeholder);
+    cy.get('input[name="firstName"]').should(
+      "have.attr",
+      "placeholder",
+      placeholder
+    );
     return this;
   }
 
@@ -23,13 +25,14 @@ class AddEmployeePageAssertions {
   }
 
   verifyMiddleNameInputFiledIsContainPlaceHolder(
-    isContain: boolean,
-    placeholder: string
+    placeholder: string,
+    isContain: boolean
   ) {
-    cy.get('input[name="middleName"]')
-      .clear()
-      .invoke("attr", "placeholder")
-      .should(isContain ? "contain" : "not.contain", placeholder);
+    cy.get('input[name="middleName"]').should(
+      "have.attr",
+      "placeholder",
+      placeholder
+    );
 
     return this;
   }
@@ -40,17 +43,7 @@ class AddEmployeePageAssertions {
       .should(isExist ? "exist" : "not.exist");
     return this;
   }
-  verifyLastNameInputFiledIsContainPlaceHolder(
-    isContain: boolean,
-    placeholder: string
-  ) {
-    cy.get('input[name="lastName"]')
-      .clear()
-      .invoke("attr", "placeholder")
-      .should(isContain ? "contain" : "not.contain", placeholder);
 
-    return this;
-  }
   verifyCreateLoginDetailsCheckboxIsExist(isExist: boolean) {
     cy.contains("p", "Create Login Details")
       .parent()
@@ -87,31 +80,37 @@ class AddEmployeePageAssertions {
   }
 
   verifyEnabledStatusCheckboxIsexist(isExist: Boolean) {
-    cy.contains("span", "Enabled")
+    cy.contains("label", "Status")
+      .parents()
+      .eq(1)
+      .contains("span", "Enabled")
       .parent()
-      .find('input[value="1"]')
+      .find("input")
       .should(isExist ? "exist" : "not.exist");
 
     return this;
   }
 
   verifyDisabledStatusCheckboxIsexist(isExist: Boolean) {
-    cy.contains("span", "Disabled")
+    cy.contains("label", "Status")
+      .parents()
+      .eq(1)
+      .contains("span", "Disabled")
       .parent()
-      .find('input[value="2"]')
+      .find("input")
       .should(isExist ? "exist" : "not.exist");
 
     return this;
   }
 
   verifySaveButtonisExist(isExist: boolean) {
-    cy.contains("Save").should(isExist ? "exist" : "not.exist");
+    cy.contains("button", "Save").should(isExist ? "exist" : "not.exist");
 
     return this;
   }
 
   verifyCancleButtonisExist(isExist: boolean) {
-    cy.contains("Cancel").should(isExist ? "exist" : "not.exist");
+    cy.contains("button", "Cancel").should(isExist ? "exist" : "not.exist");
 
     return this;
   }
@@ -193,5 +192,37 @@ class AddEmployeePageAssertions {
 
     return this;
   }
+
+  checkEmployeeListPageIsContainEmployeeId(
+    isExist: boolean,
+    employeeId: string
+  ) {
+    cy.contains("div[role=row]", employeeId).should(
+      isExist ? "exist" : "not.exist"
+    );
+    return this;
+  }
+
+  verifyEmployeeNameIsExist(
+    firstName: string,
+    lasttName: string,
+    isExist: boolean
+  ) {
+    cy.contains("h6", `${firstName} ${lasttName}`).should(
+      isExist ? "exist" : "not.exist",
+      { timeout: 10000 }
+    );
+    return this;
+  }
+
+  verifyEmployeeNameIsContainsValue(
+    firstName: string,
+    lasttName: string,
+    isContain: boolean
+  ) {
+    cy.contains("h6", `${firstName} ${lasttName}`);
+    return this;
+  }
 }
-export default AddEmployeePageAssertions;
+
+export default EmployeeListPageAssertions;

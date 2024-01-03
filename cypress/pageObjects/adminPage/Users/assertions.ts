@@ -47,20 +47,20 @@ class AddUserPageAssertions {
     return this;
   }
 
-  verifyDefultValueSelectedforUserRoleField(isExist: boolean) {
+  verifyDefultValueSelectedforUserRoleField(isExist: boolean, value: string) {
     cy.contains("label", "User Role")
       .parents()
       .eq(1)
-      .contains("div", "-- Select --")
+      .contains(".oxd-select-text-input", value)
       .should(isExist ? "exist" : "not.exist");
     return this;
   }
 
-  verifyDefultValueSelectedforStatusField(isExist: boolean) {
+  verifyDefultValueSelectedforStatusField(isExist: boolean, value: string) {
     cy.contains("label", "Status")
       .parents()
       .eq(1)
-      .contains("div", "-- Select --")
+      .contains(".oxd-select-text-input", value)
       .should(isExist ? "exist" : "not.exist");
     return this;
   }
@@ -140,6 +140,46 @@ class AddUserPageAssertions {
       .contains("span", errorMessageText)
       .should(isExist ? "exist" : "not.exist");
 
+    return this;
+  }
+
+  checkUserNameIsExistInUserGred(userName: string, isExist: boolean) {
+    cy.contains("div[role=row]", userName).should(
+      isExist ? "exist" : "not.exist"
+    );
+    return this;
+  }
+
+  checkUserRoleIsExistInUserGred(
+    userName: string,
+    userRole: string,
+    isExist: boolean
+  ) {
+    cy.contains("div[role=row]", userName)
+      .contains("div", userRole)
+      .should(isExist ? "exist" : "not.exist");
+    return this;
+  }
+
+  checkEmployeeNameIsExistInUserGred(
+    userName: string,
+    employeeName: string,
+    isExist: boolean
+  ) {
+    cy.contains("div[role=row]", userName)
+      .contains("div", employeeName)
+      .should(isExist ? "exist" : "not.exist");
+    return this;
+  }
+
+  checkStatusIsExistInUserGred(
+    userName: string,
+    Status: string,
+    isExist: boolean
+  ) {
+    cy.contains("div[role=row]", userName)
+      .contains("div", Status)
+      .should(isExist ? "exist" : "not.exist");
     return this;
   }
 }

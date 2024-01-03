@@ -1,4 +1,4 @@
-import { UserRole, UserStatus } from "./TR-02_types";
+import { UserRole } from "../../../support/adminPage/types";
 
 class AddUserPageActions {
   openAddUserPage() {
@@ -23,7 +23,7 @@ class AddUserPageActions {
     return this;
   }
 
-  selectUserRoleFromDropdown(userRole: string = UserRole.SELECT) {
+  selectUserRoleFromDropdown(userRole: string) {
     this.clickOnDropdownArrowToShowUserRoleOptions();
 
     cy.contains("label", "User Role")
@@ -34,7 +34,7 @@ class AddUserPageActions {
     return this;
   }
 
-  selectStatusFromDropdown(status: string = UserStatus.SELECT) {
+  selectStatusFromDropdown(status: string) {
     this.clickOnDropdownArrowToShowStatusOptions();
 
     cy.contains("label", "Status")
@@ -75,9 +75,7 @@ class AddUserPageActions {
   }
 
   typeInEmployeeNameInputFiled(employeeName: string) {
-    cy.get('input[placeholder="Type for hints..."]')
-      .type(employeeName)
-      .wait(2000);
+    cy.get('input[placeholder="Type for hints..."]').type(employeeName);
 
     return this;
   }
@@ -91,18 +89,34 @@ class AddUserPageActions {
   }
 
   typeInEmployeeNameInputFiledUsingAutoCompletOption(
-    partialEmployeeName: string,
-    fullEmpolyeeNameOption: string
+    firstName: string,
+    lastName: string,
+    middName?: string
   ) {
-    this.typeInEmployeeNameInputFiled(partialEmployeeName);
+    cy.intercept("GET", "/web/index.php/api/v2/pim/employees?nameOrId=**").as(
+      "getEmployees"
+    );
+
+    let employeeFullName: string = [firstName, middName, lastName]
+      .filter(Boolean)
+      .join(" ");
+    this.typeInEmployeeNameInputFiled(employeeFullName);
+
+    cy.wait("@getEmployees").then((interception) => {
+      const { response } = interception;
+      cy.wrap(response.statusCode).should("eq", 200);
+    });
+
     cy.contains("label", "Employee Name")
       .parents()
       .eq(2)
       .find('div[role="listbox"]')
-      .as("employeeNameOptions");
+      .contains(employeeFullName, { timeout: 10000 })
+      .click();
+  }
 
-    cy.get("@employeeNameOptions").should("be.visible");
-    cy.get("@employeeNameOptions").contains(fullEmpolyeeNameOption).click();
+  clickOnSearchButton() {
+    cy.contains("button", "Search").click({ force: true });
   }
 }
 

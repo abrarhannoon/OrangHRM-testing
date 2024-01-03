@@ -1,6 +1,15 @@
-class AddEmployeePageActions {
+class EmployeeListPageActions {
   openAddEmployeePage() {
+    cy.intercept(
+      "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees"
+    ).as("getEmployees");
+
+    cy.intercept(
+      "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/admin/users"
+    ).as("getUsers");
+
     cy.visit("/pim/addEmployee");
+    cy.wait(["@getEmployees", "@getUsers"]);
   }
 
   typeInEmpoyeeFirstNameInputField(firstName: string) {
@@ -66,18 +75,41 @@ class AddEmployeePageActions {
   }
 
   clickInEnabledStatusCheckbox() {
-    cy.contains("span", "Enabled").parent().find('input[value="1"]').click();
+    cy.contains("label", "Status")
+      .parents()
+      .eq(1)
+      .contains("span", "Enabled")
+      .parent()
+      .find("input")
+      .click();
   }
   clickInDisabledStatusCheckbox() {
-    cy.contains("span", "Disabled").parent().find('input[value="2"]').click();
+    cy.contains("label", "Status")
+      .parents()
+      .eq(1)
+      .contains("span", "Disabled")
+      .parent()
+      .find("input")
+      .click();
+
+    return this;
   }
 
   clickOnSaveButton() {
-    cy.contains("Save").click();
+    cy.intercept(
+      "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees"
+    ).as("getEmployeeDetails");
+
+    cy.contains("button", "Save").click();
+    cy.wait("@getEmployeeDetails");
   }
 
   clickOnCancleButton() {
-    cy.contains("Cancel").click();
+    cy.contains("button", "Cancel").click();
+  }
+
+  clickOnSearchButton() {
+    cy.contains("button", "Search").click({ force: true });
   }
 }
-export default AddEmployeePageActions;
+export default EmployeeListPageActions;
