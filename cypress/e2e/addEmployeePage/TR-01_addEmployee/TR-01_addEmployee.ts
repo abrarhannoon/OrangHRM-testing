@@ -315,6 +315,7 @@ Then(
   }
 );
 Then("The displayed Personal Details should be correct", () => {
+  employeeListPageAssertions.verifyEmployeeDetailsPageOpen();
   employeeListPageAssertions
     .verifyEmployeeNameIsExist(employee.firstName, employee.lastName, true)
     .verifyEmployeeNameIsContainsValue(

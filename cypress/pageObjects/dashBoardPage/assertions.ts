@@ -8,13 +8,5 @@ class HomePageAssertions {
     cy.url().should("include", "dashboard/index");
     return this;
   }
-
-  verifyNavbarElementExistenceByText(value: string) {
-    cy.get("ul.oxd-main-menu")
-      .find("li.oxd-main-menu-item-wrapper")
-      .contains("span", value)
-      .should("exist");
-    return this;
-  }
 }
 export default HomePageAssertions;

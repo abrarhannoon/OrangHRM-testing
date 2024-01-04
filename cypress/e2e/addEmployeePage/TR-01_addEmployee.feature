@@ -19,7 +19,7 @@ Feature: TR-01_Add employee page
         Then The user name input field should be displayed correctly
         And The password input field should be displayed correctly
         And The Confirm Password input field should be displayed correctly
-
+    @focus
     Scenario: Verify successful employee creation with valid data
         Given The admin user logged in to the system
         When The admin user visits the Add Employee page
@@ -43,7 +43,7 @@ Feature: TR-01_Add employee page
         And Enters valid last name for the employee without enters login details
         And The admin user clicks on Save button
         Then The displayed Personal Details should be correct
-    @focus
+
     Scenario: Verify unsuccessful employee creation when already exists employee id enterd
         Given The admin user logged in to the system
         When The admin user visits the Add Employee page
@@ -58,7 +58,7 @@ Feature: TR-01_Add employee page
         And Enters valid last name for the employee with Already stored id in the system
         And Enters valid employee id for the employee with Already stored id in the system
         Then The employee should not be added due to duplicated employee Id and "Employee Id already exists" error message should be exists
-    @focus
+
     Scenario: Verify unsuccessful employee creation when already exists user name enterd
         Given The admin user logged in to the system
         When The admin user visits the Add Employee page
@@ -70,7 +70,7 @@ Feature: TR-01_Add employee page
         And Enters valid password for employee with Existing user name
         And Enters valid confirm password for employee with Existing user name
         Then The employee should not be added due to duplicated user name and "Username already exists" error message should be exists
-    @focus
+
     Scenario: Verify unsuccessful employee creation with missing required fields
         Given The admin user logged in to the system
         When The admin user visits the Add Employee page

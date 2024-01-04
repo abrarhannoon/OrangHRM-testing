@@ -81,7 +81,7 @@ class AddUserPageActions {
   }
 
   clickOnSaveButton() {
-    cy.contains("button", "Save").click({ timeout: 10000 });
+    cy.contains("button", "Save").click();
   }
 
   clickOnCancleButton() {

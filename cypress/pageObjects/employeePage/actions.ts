@@ -96,12 +96,7 @@ class EmployeeListPageActions {
   }
 
   clickOnSaveButton() {
-    cy.intercept(
-      "https://opensource-demo.orangehrmlive.com/web/index.php/api/v2/pim/employees"
-    ).as("getEmployeeDetails");
-
     cy.contains("button", "Save").click();
-    cy.wait("@getEmployeeDetails");
   }
 
   clickOnCancleButton() {

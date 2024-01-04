@@ -182,6 +182,13 @@ class AddUserPageAssertions {
       .should(isExist ? "exist" : "not.exist");
     return this;
   }
+
+  verifyEmployeeDetailsPageOpen() {
+    cy.location("pathname", { timeout: 10000 }).should(
+      "eq",
+      "/web/index.php/admin/viewSystemUsers"
+    );
+  }
 }
 
 export default AddUserPageAssertions;

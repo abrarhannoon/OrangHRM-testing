@@ -8,6 +8,7 @@ Feature: TC-02_ Add user page
         Given The admin user logged in to the system
         When The admin user visits add user page
         Then Add user page should display and contains all required fields
+
     Scenario:Verify that a new Admin user can be added with valid data
         Given The admin user logged in to the system
         When The admin user visits add user page
@@ -84,6 +85,7 @@ Feature: TC-02_ Add user page
         And The admin user enter valid Cinform Password
         And click on the Save button
         Then An error message with text "Should not exceed 40 characters" should displaye for User Name
+
     Scenario: Verify the "Cancel" button returns to the system users page
         Given The admin user logged in to the system
         When The admin user visits add user page

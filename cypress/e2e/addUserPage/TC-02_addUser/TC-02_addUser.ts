@@ -96,6 +96,7 @@ When("The admin user select Status selection value as Disabled", () => {
 });
 
 let text: string = "a".repeat(60);
+
 When(
   "The admin user enter user name input field greater than the maximum length",
   () => {
@@ -106,6 +107,7 @@ When(
 Then(
   "The new user should be added to the system and redirect the user to system users page",
   () => {
+    addUserPageAssertions.verifyEmployeeDetailsPageOpen();
     addUserPageAssertions
       .checkUserNameIsExistInUserGred(user.username, true)
       .checkStatusIsExistInUserGred(user.username, user.status, true)
@@ -116,6 +118,7 @@ Then(
 Then(
   "The new ESS user should be added to the system and redirect the user to system users page",
   () => {
+    addUserPageAssertions.verifyEmployeeDetailsPageOpen();
     addUserPageAssertions
       .checkUserNameIsExistInUserGred(user.username, true)
       .checkStatusIsExistInUserGred(user.username, user.status, true)
@@ -126,6 +129,7 @@ Then(
 Then(
   "The new user with disabled should be added to the system and redirect the user to system users page",
   () => {
+    addUserPageAssertions.verifyEmployeeDetailsPageOpen();
     addUserPageAssertions
       .checkUserNameIsExistInUserGred(user.username, true)
       .checkStatusIsExistInUserGred(user.username, disabledStatus, true)

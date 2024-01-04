@@ -223,6 +223,12 @@ class EmployeeListPageAssertions {
     cy.contains("h6", `${firstName} ${lasttName}`);
     return this;
   }
+  verifyEmployeeDetailsPageOpen() {
+    cy.location("pathname", { timeout: 10000 }).should(
+      "include",
+      "/pim/viewPersonalDetails/empNumber/"
+    );
+  }
 }
 
 export default EmployeeListPageAssertions;
